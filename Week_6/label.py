@@ -25,7 +25,7 @@ template = {
     "imageWidth": 0
 }
 
-image_dir = "image_small"
+image_dir = "image"
 annotation_dir = "annotation"
 
 os.makedirs(annotation_dir, exist_ok=True)
