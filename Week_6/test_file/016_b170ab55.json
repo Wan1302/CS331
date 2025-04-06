@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          128.0,
+          38.0
+        ],
+        [
+          341.0,
+          361.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "016_b170ab55.jpg",
+  "imageData": null,
+  "imageHeight": 575,
+  "imageWidth": 474
+}

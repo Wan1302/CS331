@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          133.0,
+          106.0
+        ],
+        [
+          338.0,
+          407.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "004_dc64d954.jpg",
+  "imageData": null,
+  "imageHeight": 474,
+  "imageWidth": 474
+}

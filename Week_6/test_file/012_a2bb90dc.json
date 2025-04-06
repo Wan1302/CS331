@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          133.0,
+          23.0
+        ],
+        [
+          323.0,
+          296.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "012_a2bb90dc.jpg",
+  "imageData": null,
+  "imageHeight": 474,
+  "imageWidth": 474
+}

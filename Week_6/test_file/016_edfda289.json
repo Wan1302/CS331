@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          160.0,
+          29.0
+        ],
+        [
+          274.0,
+          194.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "016_edfda289.jpg",
+  "imageData": null,
+  "imageHeight": 400,
+  "imageWidth": 474
+}

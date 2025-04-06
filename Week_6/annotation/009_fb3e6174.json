@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          102.0,
+          68.0
+        ],
+        [
+          280.0,
+          372.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "009_fb3e6174.jpg",
+  "imageData": null,
+  "imageHeight": 568,
+  "imageWidth": 474
+}

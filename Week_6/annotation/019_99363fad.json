@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          191.0,
+          63.0
+        ],
+        [
+          278.0,
+          209.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "019_99363fad.jpg",
+  "imageData": null,
+  "imageHeight": 588,
+  "imageWidth": 474
+}

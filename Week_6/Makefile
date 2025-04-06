@@ -1,9 +1,9 @@
 test: clean
 	python label.py
 	mkdir test
-	cp image/* test
-	cp annotation/* test
+	xcopy /E /I image test
+	xcopy /E /I annotation test
 
 clean:
-	rm -rf annotation
-	rm -rf test
+	if exist annotation rmdir /s /q annotation
+	if exist test rmdir /s /q test

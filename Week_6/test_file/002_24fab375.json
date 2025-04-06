@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          160.0,
+          52.0
+        ],
+        [
+          325.0,
+          315.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "002_24fab375.jpg",
+  "imageData": null,
+  "imageHeight": 572,
+  "imageWidth": 474
+}

@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          81.0,
+          35.0
+        ],
+        [
+          308.0,
+          395.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "006_bbb6978e.jpg",
+  "imageData": null,
+  "imageHeight": 474,
+  "imageWidth": 474
+}

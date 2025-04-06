@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          185.0,
+          17.0
+        ],
+        [
+          389.0,
+          348.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "028_febcaba9.jpg",
+  "imageData": null,
+  "imageHeight": 592,
+  "imageWidth": 474
+}

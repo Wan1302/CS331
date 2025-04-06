@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "0",
+      "text": "",
+      "points": [
+        [
+          96.89304812834226,
+          51.54010695187165
+        ],
+        [
+          345.02139037433153,
+          431.21925133689837
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "026_bb842452.jpg",
+  "imageData": null,
+  "imageHeight": 448,
+  "imageWidth": 474
+}

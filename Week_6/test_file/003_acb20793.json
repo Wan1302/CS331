@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          128.0,
+          -8.0
+        ],
+        [
+          324.0,
+          322.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "003_acb20793.jpg",
+  "imageData": null,
+  "imageHeight": 479,
+  "imageWidth": 474
+}

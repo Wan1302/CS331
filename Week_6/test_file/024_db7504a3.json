@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          133.0,
+          39.0
+        ],
+        [
+          332.0,
+          338.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "024_db7504a3.jpg",
+  "imageData": null,
+  "imageHeight": 476,
+  "imageWidth": 474
+}

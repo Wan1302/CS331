@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          139.0,
+          36.0
+        ],
+        [
+          331.0,
+          313.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "009_8844bacc.jpg",
+  "imageData": null,
+  "imageHeight": 576,
+  "imageWidth": 474
+}

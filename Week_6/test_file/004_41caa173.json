@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          100.0,
+          13.0
+        ],
+        [
+          289.0,
+          301.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "004_41caa173.jpg",
+  "imageData": null,
+  "imageHeight": 418,
+  "imageWidth": 474
+}

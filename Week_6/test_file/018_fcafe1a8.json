@@ -1,0 +1,27 @@
+{
+  "version": "0.4.16",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "face",
+      "text": "",
+      "points": [
+        [
+          133.0,
+          0.0
+        ],
+        [
+          332.0,
+          270.0
+        ]
+      ],
+      "group_id": null,
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "imagePath": "018_fcafe1a8.jpg",
+  "imageData": null,
+  "imageHeight": 474,
+  "imageWidth": 474
+}
