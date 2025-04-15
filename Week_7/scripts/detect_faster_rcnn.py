@@ -10,6 +10,7 @@ import numpy as np
 from PIL import Image
 
 from models.FASTER_RCNN import FASTER_RCNN
+from torchvision.models.detection import FasterRCNN_ResNet50_FPN_Weights
 from utils.function import non_max_suppression
 from utils.function import draw_bbox
 from utils.yaml_helper import read_yaml
@@ -29,7 +30,7 @@ def inference(
     model.model.to(device)
     model.eval()
 
-    weights = models.detection.FasterRCNN_MobileNet_V3_Large_FPN_Weights.DEFAULT
+    weights = FasterRCNN_ResNet50_FPN_Weights.DEFAULT
     normalize = weights.transforms()
     transform = transforms.Compose([
         transforms.Resize((640, 640)),

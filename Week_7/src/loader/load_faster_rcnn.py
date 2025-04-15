@@ -4,12 +4,14 @@ from PIL import Image
 from torchvision import transforms
 from torchvision import models 
 from torch.utils.data import Dataset
+from torchvision.models.detection import fasterrcnn_resnet50_fpn, FasterRCNN_ResNet50_FPN_Weights
+
 
 
 class CustomDataset(Dataset):
     def __init__(self, root_dir, sub_dir, transform):
         self.root_dir = root_dir
-        self.transforms = transform
+        self.transform = transform
         self.sub_dir = sub_dir
         self.image_dir = os.path.join(root_dir, "images", sub_dir)
         self.label_dir = os.path.join(root_dir, "labels", sub_dir)
@@ -64,9 +66,9 @@ class CustomDataset(Dataset):
         target = {'boxes': boxes, 'labels': labels, 'image_id': torch.tensor(idx)}
         return image, target
     
-def get_preprocessed_data(data_path, args):
-    weights = models.detection.fasterrcnn_resnet50_fpn(pretrained=True).weights()
-    normalize = weights.transform()
+def get_preprocessed_data(data_path, sub_dir, args):
+    weights = FasterRCNN_ResNet50_FPN_Weights.DEFAULT
+    normalize = weights.transforms()
     transform = None
     if bool(args.is_aug):
         transform = transforms.Compose([
@@ -85,6 +87,7 @@ def get_preprocessed_data(data_path, args):
         ])
     data = CustomDataset(
         root_dir=data_path,
+        sub_dir=sub_dir,
         transform=transform
     )
     return data

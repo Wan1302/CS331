@@ -160,8 +160,8 @@ def train_model(train_loader, val_loader, device, num_classes=7, epochs=10, batc
             for idx, class_name in enumerate(CLASS_NAMES):
                 ap50 = ap_per_class[idx].item()
                 ar50 = ar_per_class[idx].item()
-                print(f"Class {idx} ({class_name}): AP@50={ap50:.4f}")
-                # print(f"Class {idx} ({class_name}): AP@50={ap50:.4f}, AR@50={ar50:.4f}")
+                # print(f"Class {idx} ({class_name}): AP@50={ap50:.4f}")
+                print(f"Class {idx} ({class_name}): AP@50={ap50:.4f}, AR@50={ar50:.4f}")
             print(f"\nmAP@0.5 (all classes): {map50:.4f}")
             # print(f"mAR@0.5 (all classes): {mar50:.4f}")
             print("=================================")
@@ -182,8 +182,6 @@ def train_model(train_loader, val_loader, device, num_classes=7, epochs=10, batc
 
 def main():
     FOLDER_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', args.data_dir))
-    TRAIN_PATH = os.path.join(FOLDER_PATH, 'images', 'train')
-    VAL_PATH = os.path.join(FOLDER_PATH, 'images', 'val')
     BATCH_SIZE = args.batch_size
     EPOCHS = args.epochs
     EVAL_EVERY = args.eval_every
@@ -191,8 +189,8 @@ def main():
     
     # Create dataset
     print("Loading dataset...")
-    train_dataset = get_preprocessed_data(TRAIN_PATH, args=args)
-    val_dataset = get_preprocessed_data(VAL_PATH, args=args)
+    train_dataset = get_preprocessed_data(FOLDER_PATH, sub_dir="train", args=args)
+    val_dataset = get_preprocessed_data(FOLDER_PATH, sub_dir="val", args=args)
     # Create Dataloader
     train_loader = DataLoader(
         train_dataset,
