@@ -14,7 +14,7 @@ from models.FASTER_RCNN import FASTER_RCNN
 from utils.metrics import compute_metrics
 from utils.yaml_helper import read_yaml
 from utils.data_helper import collate_fn
-from loader.loader_faster_rcnn import get_preprocessed_data
+from loader.load_faster_rcnn import get_preprocessed_data
 from parsers.parser_faster_rcnn import parse_args
 
 args = parse_args()

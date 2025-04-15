@@ -13,8 +13,6 @@ from models.FASTER_RCNN import FASTER_RCNN
 from utils.function import non_max_suppression
 from utils.function import draw_bbox
 from utils.yaml_helper import read_yaml
-from utils.detect_css_violations import detect_css_violations, STrack
-
 
 def inference(
         weights="weights/faster-rcnn.pt", 
