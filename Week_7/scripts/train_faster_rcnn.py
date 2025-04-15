@@ -182,8 +182,8 @@ def train_model(train_loader, val_loader, device, num_classes=7, epochs=10, batc
 
 def main():
     FOLDER_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', args.data_dir))
-    TRAIN_PATH = os.path.join(FOLDER_PATH, 'train')
-    VAL_PATH = os.path.join(FOLDER_PATH, 'val')
+    TRAIN_PATH = os.path.join(FOLDER_PATH, 'images', 'train')
+    VAL_PATH = os.path.join(FOLDER_PATH, 'images', 'val')
     BATCH_SIZE = args.batch_size
     EPOCHS = args.epochs
     EVAL_EVERY = args.eval_every
@@ -191,8 +191,8 @@ def main():
     
     # Create dataset
     print("Loading dataset...")
-    train_dataset = get_preprocessed_data(TRAIN_PATH, sub_dir='train', args=args)
-    val_dataset = get_preprocessed_data(VAL_PATH, sub_dir='val', args=args)
+    train_dataset = get_preprocessed_data(TRAIN_PATH, args=args)
+    val_dataset = get_preprocessed_data(VAL_PATH, args=args)
     # Create Dataloader
     train_loader = DataLoader(
         train_dataset,
