@@ -64,7 +64,7 @@ class CustomDataset(Dataset):
         target = {'boxes': boxes, 'labels': labels, 'image_id': torch.tensor(idx)}
         return image, target
     
-def get_processed_data(data_path, args):
+def get_preprocessed_data(data_path, args):
     weights = models.detection.fasterrcnn_resnet50_fpn(pretrained=True).weights()
     normalize = weights.transform()
     transform = None
