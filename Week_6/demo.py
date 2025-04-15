@@ -82,7 +82,7 @@ image_paths = []
 
 while captured < num_photos:
     ret, frame = cap.read()
-    cropped = frame[120:120+400, 200:200+600]
+    cropped = frame[120:120+600, 200:200+600]
     cv2.imshow("Nhấn Enter để chụp ảnh...", cropped)
 
     if cv2.waitKey(1) & 0xFF == 13:  # Phím Enter
