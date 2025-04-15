@@ -3,6 +3,7 @@ from torchvision import models
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from utils.function import remove_invalid_boxes
 
+# Define the FASTER_RCNN class
 class FASTER_RCNN:
     def __init__(self, num_classes):
         self.weights = models.detection.fasterrcnn_resnet50_fpn_v2(weights='DEFAULT').weights()
