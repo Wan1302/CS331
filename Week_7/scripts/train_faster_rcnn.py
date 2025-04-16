@@ -3,6 +3,7 @@ import os
 import datetime
 from tqdm import tqdm
 import torch
+import csv
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
@@ -60,6 +61,15 @@ def train_model(train_loader, val_loader, device, num_classes=7, epochs=10, batc
     log_dir = "logs"
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
+
+    csv_file = os.path.join(log_dir, "result.csv")
+    with open(csv_file, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            "epoch", "train/box_loss", "train/obj_loss", "train/cls_loss",
+            "metrics/precision", "metrics/recall", "metrics/mAP_0.5",
+            "val/box_loss", "val/obj_loss", "val/cls_loss", "learning_rate"
+        ])
         
     #setup model
     model = FASTER_RCNN(num_classes)
@@ -144,42 +154,79 @@ def train_model(train_loader, val_loader, device, num_classes=7, epochs=10, batc
         # Calculate average losses for epoch
         #! ====================== EVALUATION ================
         avg_losses = {k: v/num_batches for k, v in epoch_losses.items()}
-        if eval_every > 0 and (epoch + 1) % eval_every == 0:
-            metrics = evaluate_model(model, val_loader, device)
-            # log avg losses
-            print(
-                f"================================= \n"
-                f"[Evaluate epoch {epoch+1}] \n"
-                f"Average cls_loss:{avg_losses['cls_loss']:.4f}\t"
-                f"Average box_loss:{avg_losses['box_loss']:.4f}\t"
-                f"Average obj_loss:{avg_losses['obj_loss']:.4f}"
-            )
-            # log metrics
-            ap_per_class = metrics["ap50_per_class"]
-            ar_per_class = metrics["ar50_per_class"]
-            map50 = metrics["map50"]
-            # mar50 = metrics["mar50"]
-            # Print AP@0.5 and AR@0.5 for each class
-            print("\nPer-class AP/AR (IoU=0.5):")
-            for idx, class_name in enumerate(CLASS_NAMES):
-                ap50 = ap_per_class[idx].item()
-                ar50 = ar_per_class[idx].item()
-                # print(f"Class {idx} ({class_name}): AP@50={ap50:.4f}")
-                print(f"Class {idx} ({class_name}): AP@50={ap50:.4f}, AR@50={ar50:.4f}")
-            print(f"\nmAP@0.5 (all classes): {map50:.4f}")
-            # print(f"mAR@0.5 (all classes): {mar50:.4f}")
-            print("=================================")
+        # if eval_every > 0 and (epoch + 1) % eval_every == 0:
+        metrics = evaluate_model(model, val_loader, device)
 
-            if map50 > best_map50:
-                best_map50 = map50
-                best_model_wts = model.model.state_dict()
-                print(f">>> New best model found at epoch {epoch+1} with mAP@0.5 = {map50:.4f}")
+        # ====================== VAL LOSS ================
+        val_losses = {
+            'cls_loss': 0.0,
+            'box_loss': 0.0,
+            'obj_loss': 0.0
+        }
+        val_batches = len(val_loader)
+        model.model.train()
+        with torch.no_grad():
+            for images, targets in val_loader:
+                images = [img.to(device) for img in images]
+                targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
+                loss_dict = model.model(images, targets)
 
-            # Save model at Epoch X
-            timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-            if not os.path.exists("weights"):
-                os.makedirs("weights")
-            torch.save(model.model.state_dict(), f"weights/epoch{epoch}-faster-rcnn-{timestamp}.pt")
+                val_losses['cls_loss'] += loss_dict['loss_classifier'].item()
+                val_losses['box_loss'] += loss_dict['loss_box_reg'].item()
+                val_losses['obj_loss'] += loss_dict['loss_objectness'].item()
+
+        val_losses = {k: v/val_batches for k, v in val_losses.items()}
+
+        # log avg losses
+        print(
+            f"================================= \n"
+            f"[Evaluate epoch {epoch+1}] \n"
+            f"Average cls_loss:{avg_losses['cls_loss']:.4f}\t"
+            f"Average box_loss:{avg_losses['box_loss']:.4f}\t"
+            f"Average obj_loss:{avg_losses['obj_loss']:.4f}"
+        )
+        # log metrics
+        ap_per_class = metrics["ap50_per_class"]
+        ar_per_class = metrics["ar50_per_class"]
+        map50 = metrics["map50"]
+        mar50 = metrics["mar50"]
+        # Print AP@0.5 and AR@0.5 for each class
+        print("\nPer-class AP/AR (IoU=0.5):")
+        for idx, class_name in enumerate(CLASS_NAMES):
+            ap50 = ap_per_class[idx].item()
+            ar50 = ar_per_class[idx].item()
+            # print(f"Class {idx} ({class_name}): AP@50={ap50:.4f}")
+            print(f"Class {idx} ({class_name}): AP@50={ap50:.4f}, AR@50={ar50:.4f}")
+        print(f"\nmAP@0.5 (all classes): {map50:.4f}")
+        # print(f"mAR@0.5 (all classes): {mar50:.4f}")
+        print("=================================")
+
+        with open(csv_file, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([
+                epoch+1,
+                avg_losses['box_loss'],
+                avg_losses['obj_loss'],
+                avg_losses['cls_loss'],
+                map50,
+                mar50,
+                map50,
+                val_losses['box_loss'],
+                val_losses['obj_loss'],
+                val_losses['cls_loss'],
+                optimizer.param_groups[0]['lr']
+            ])
+
+        if map50 > best_map50:
+            best_map50 = map50
+            best_model_wts = model.model.state_dict()
+            print(f">>> New best model found at epoch {epoch+1} with mAP@0.5 = {map50:.4f}")
+
+        # Save model at Epoch X
+        # timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        # if not os.path.exists("weights"):
+        #     os.makedirs("weights")
+        # torch.save(model.model.state_dict(), f"weights/epoch{epoch}-faster-rcnn-{timestamp}.pt")
 
 
     # Save model
