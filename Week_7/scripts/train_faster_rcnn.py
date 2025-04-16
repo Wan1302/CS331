@@ -85,6 +85,10 @@ def train_model(train_loader, val_loader, device, num_classes=7, epochs=10, batc
     print("Batch size: ", batch_size)
     print("Dataset length: ", len(train_loader.dataset))
     print("Evaluation every: ", eval_every)
+
+    best_map50 = 0.0
+    best_model_wts = None
+
     for epoch in range(epochs):
         model.train()
         
@@ -166,6 +170,11 @@ def train_model(train_loader, val_loader, device, num_classes=7, epochs=10, batc
             # print(f"mAR@0.5 (all classes): {mar50:.4f}")
             print("=================================")
 
+            if map50 > best_map50:
+                best_map50 = map50
+                best_model_wts = model.model.state_dict()
+                print(f">>> New best model found at epoch {epoch+1} with mAP@0.5 = {map50:.4f}")
+
             # Save model at Epoch X
             timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
             if not os.path.exists("weights"):
@@ -178,6 +187,8 @@ def train_model(train_loader, val_loader, device, num_classes=7, epochs=10, batc
     if not os.path.exists("weights"):
         os.makedirs("weights")
     torch.save(model.model.state_dict(), f"weights/last-faster-rcnn-{timestamp}.pt")
+    if best_model_wts is not None:
+        torch.save(best_model_wts, f"weights/best-faster-rcnn.pt")
     print("Training complete.")
 
 def main():
