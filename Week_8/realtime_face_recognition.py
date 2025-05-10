@@ -1,11 +1,10 @@
 import cv2
-import torch
 import pickle
 import numpy as np
+import time
 from ultralytics import YOLO
 from insightface.app import FaceAnalysis
 from sklearn.metrics.pairwise import cosine_similarity
-import os
 
 yolo_model = YOLO("yolov11s-face.pt")
 
@@ -21,7 +20,9 @@ avg_embeddings = {
 }
 
 cap = cv2.VideoCapture(0)
-print("[INFO] Nhấn 'q' để thoát...")
+print("[INFO] Press 'q' to exit...")
+
+prev_time = time.time()
 
 while True:
     ret, frame = cap.read()
@@ -62,9 +63,21 @@ while True:
         x2 = min(frame.shape[1], x2 - margin_x)
         y2 = min(frame.shape[0], y2 - margin_y)
 
-        cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-        cv2.putText(frame, label, (x1, y1 - 10),
+        if label != "Unknown":
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.putText(frame, label, (x1, y1 - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+        else:
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
+            cv2.putText(frame, label, (x1, y1 - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+            
+    curr_time = time.time()
+    fps = 1 / (curr_time - prev_time)
+    prev_time = curr_time
+
+    cv2.putText(frame, f"FPS: {fps:.2f}", (10, 30),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
 
     cv2.imshow("Face Recognition", frame)
 
