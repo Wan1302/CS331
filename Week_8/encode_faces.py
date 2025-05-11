@@ -1,12 +1,9 @@
 import cv2
-import torch
 import numpy as np
-import insightface
 from insightface.app import FaceAnalysis
 from ultralytics import YOLO
 import os
 import pickle
-from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 
 # Load YOLOv11s face detector
 yolo_model = YOLO("yolov11s-face.pt")
@@ -27,7 +24,7 @@ else:
 
 for person_name in os.listdir(db_path):
     if person_name in embeddings:
-        print(f"Đã có feature embeddings cho {person_name}.")
+        print(f"Precomputed facial feature embeddings are available for {person_name}.")
         continue
 
     person_path = os.path.join(db_path, person_name)
@@ -51,7 +48,6 @@ for person_name in os.listdir(db_path):
 
             face_crop = img[y1:y2, x1:x2]
             face_crop_rgb = cv2.cvtColor(face_crop, cv2.COLOR_BGR2RGB)
-            face_crop_rgb = face_crop_rgb.astype(np.uint8)
             
             emb = app.get(face_crop_rgb)
             if emb:
